@@ -1,3 +1,8 @@
-<td>
-  <h4>{{new.title}}</h4>
-</td>
+<div>
+  <tr align="left" style="margin-bottom: 0">
+    <td style="font-size: 15px">{{index}}. <a [href]="new.url">{{new.title}}</a></td>
+  </tr>
+  <tr align="left" style="margin: 0">
+    <td style="padding-left: 15px; font-size: 12px">{{new.score}} points by {{new.by}}</td>
+  </tr>
+</div>
