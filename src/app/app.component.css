@@ -1,0 +1,13 @@
+a {
+  text-decoration: none;
+}
+
+.container {
+  text-align: center;
+}
+
+.container-table {
+  width: 85%;
+  display: table;
+  background-color: rgb(246, 246, 239);
+}
