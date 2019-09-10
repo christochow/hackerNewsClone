@@ -11,8 +11,11 @@ export class NewRowComponent implements OnInit {
   @Input()
   id: string;
 
+  @Input()
+  index: number;
+
   new: object;
-  api: HackerNewsAPIService
+  api: HackerNewsAPIService;
 
   constructor(api: HackerNewsAPIService){
     this.api = api;
