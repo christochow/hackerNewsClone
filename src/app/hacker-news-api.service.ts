@@ -16,4 +16,8 @@ export class HackerNewsAPIService {
     return this.http.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
   }
 
+  getAsk(){
+    return this.http.get('https://hacker-news.firebaseio.com//v0/askstories.json');
+  }
+
 }

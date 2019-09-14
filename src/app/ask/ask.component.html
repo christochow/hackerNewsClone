@@ -1,0 +1,7 @@
+<table width="100%">
+  <tbody>
+  <tr *ngFor="let s of pageStories let i = index">
+    <app-ask-row [id]="s" [index] = i+1></app-ask-row>
+  </tr>
+  </tbody>
+</table>
