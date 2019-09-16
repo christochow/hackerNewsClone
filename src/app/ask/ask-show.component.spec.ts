@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AskRowComponent } from './ask-row.component';
+import { AskShowComponent } from './ask-show.component';
 
-describe('AskRowComponent', () => {
-  let component: AskRowComponent;
-  let fixture: ComponentFixture<AskRowComponent>;
+describe('AskShowComponent', () => {
+  let component: AskShowComponent;
+  let fixture: ComponentFixture<AskShowComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AskRowComponent ]
+      declarations: [ AskShowComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AskRowComponent);
+    fixture = TestBed.createComponent(AskShowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

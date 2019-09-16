@@ -5,18 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {NewModule} from './new/new.module';
 import {HttpClientModule} from '@angular/common/http';
-import {AskModule} from './ask/ask.module';
+import {AskShowModule} from './ask/ask-show.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     NewModule,
-    AskModule
+    AskShowModule
   ],
   providers: [],
   bootstrap: [AppComponent],
