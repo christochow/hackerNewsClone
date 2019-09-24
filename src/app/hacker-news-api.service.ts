@@ -12,7 +12,7 @@ export class HackerNewsAPIService {
     return this.http.get('https://hacker-news.firebaseio.com/v0/newstories.json');
   }
 
-  getItem(id: string){
+  getItem(id: string) {
     return this.http.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
   }
 

@@ -1,0 +1,12 @@
+<tr *ngIf="!item.deleted">
+  <td [width]="depth*50 + 'px'"></td>
+  <td>
+    <table>
+    <tr align="left">{{id}}</tr>
+    <tr [innerHTML]="item.text" align="left"></tr>
+    </table>
+  </td>
+</tr>
+<table>
+<tr app-comment *ngFor="let i of item.kids" [depth]="depth+1" [id]="i"></tr>
+</table>
