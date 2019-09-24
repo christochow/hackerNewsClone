@@ -1,5 +1,6 @@
 <table>
   <tbody>
+  <app-row *ngIf="item.id" [isCommentPage]="true" [id]="item.id"></app-row>
   <tr app-comment *ngFor="let i of item.kids" [depth]="0" [id]="i"></tr>
   </tbody>
 </table>

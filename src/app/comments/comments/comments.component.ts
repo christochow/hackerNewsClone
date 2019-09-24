@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
 import {switchMap} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-comments',
@@ -13,7 +14,7 @@ export class CommentsComponent implements OnInit {
   @Input()
   item: object;
 
-  constructor(private api: HackerNewsAPIService, private route: ActivatedRoute) {
+  constructor(private api: HackerNewsAPIService, private route: ActivatedRoute, private titleService: Title) {
   }
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class CommentsComponent implements OnInit {
         this.api.getItem(params.get('id')))
     ).subscribe(data => {
       this.item = data;
-      console.log(this.item)
+      this.titleService.setTitle(this.item['title']);
     });
   }
 
