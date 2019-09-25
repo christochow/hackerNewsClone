@@ -7,6 +7,7 @@ import {NewModule} from './new/new.module';
 import {HttpClientModule} from '@angular/common/http';
 import {AskShowModule} from './ask/ask-show.module';
 import {CommentsModule} from './comments/comments.module';
+import {UserModule} from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {CommentsModule} from './comments/comments.module';
     AppRoutingModule,
     NewModule,
     AskShowModule,
-    CommentsModule
+    CommentsModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent],

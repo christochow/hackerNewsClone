@@ -1,0 +1,6 @@
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tbody>
+  <app-submission *ngFor="let s of submissions.slice(0,30) let i = index" [id]="s" [index] = "i+1"
+    (disable)="submissions = onDisable($event, submissions)"></app-submission>
+  </tbody>
+</table>

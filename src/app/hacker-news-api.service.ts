@@ -17,11 +17,15 @@ export class HackerNewsAPIService {
   }
 
   getAsk(){
-    return this.http.get('https://hacker-news.firebaseio.com//v0/askstories.json');
+    return this.http.get('https://hacker-news.firebaseio.com/v0/askstories.json');
   }
 
   getShow(){
-    return this.http.get('https://hacker-news.firebaseio.com//v0/showstories.json');
+    return this.http.get('https://hacker-news.firebaseio.com/v0/showstories.json');
+  }
+
+  getUser(id: string){
+    return this.http.get(`https://hacker-news.firebaseio.com/v0/user/${id}.json`);
   }
 
 }

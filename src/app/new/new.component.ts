@@ -18,7 +18,7 @@ export class NewComponent implements OnInit{
     this.titleService.setTitle('Hacker news');
     this.api.getNews().subscribe(data => {
       this.stories = data as any[];
-      this.pageStories = this.stories.splice(1, 30);
+      this.pageStories = this.stories.slice(0, 30);
     });
   }
 
