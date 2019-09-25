@@ -32,9 +32,9 @@ export class RowComponent implements OnInit {
     this.new = {};
     this.api.getItem(this.id).subscribe(r => {
       this.new = r;
-      const hasKids = this.new['kids'] !== undefined && this.new['kids'] !== null;
-      this.discuss = (!hasKids || this.new['kids'].length === 0) ?
-        'discuss' : this.new['kids'].length + ' comment' + (this.new['kids'].length === 1 ? '' : 's');
+      const hasKids = this.new['descendants'] !== undefined && this.new['descendants'] !== null;
+      this.discuss = (!hasKids || this.new['descendants'] === 0) ?
+        'discuss' : this.new['descendants'] + ' comment' + (this.new['descendants'] === 1 ? '' : 's');
     });
   }
 

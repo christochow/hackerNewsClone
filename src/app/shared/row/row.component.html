@@ -1,8 +1,8 @@
 <div>
   <tr align="left" style="margin: 0">
     <td *ngIf="isCommentPage" width="2.5px"></td>
-    <td *ngIf="!isCommentPage" style="font-size: 15px" [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [href]="new.url">{{new.title}}</a></td>
-    <td *ngIf="isCommentPage" style="font-size: 16px"><a [href]="new.url">{{new.title}}</a></td>
+    <td *ngIf="!isCommentPage" style="font-size: 15px" [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [routerLink]="['../comments/'+new.id]" [routerLinkActive]="new.url !== undefined? 'active':''"  [href]="new.url">{{new.title}}</a></td>
+    <td *ngIf="isCommentPage" style="font-size: 16px"><a [routerLink]="['./']" [routerLinkActive]="new.url !== undefined? 'active':''" [href]="new.url">{{new.title}}</a></td>
   </tr>
   <tr align="left" style="margin: 0;">
     <td *ngIf="isCommentPage" width="2.5px"></td>
@@ -12,7 +12,7 @@
       <span *ngIf="isNews">|</span>
       <span *ngIf="isNews" style="font-size: 12px;margin: 2px"><a [href]="'https://www.google.com/search?q='+new.title" target="_blank">web</a></span>
       <span>|</span>
-      <span style="font-size: 12px;"><a [routerLink]="['../comments/'+ new.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
+      <span style="font-size: 12px;"><a [routerLink]="isCommentPage?['./']:['../comments/'+new.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
     </td>
   </tr>
 </div>
