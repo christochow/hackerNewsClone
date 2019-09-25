@@ -22,7 +22,7 @@ export class AskShowComponent implements OnInit{
     this.titleService.setTitle(this.isShow ? 'Show' : 'Ask');
     (this.isShow ? this.api.getShow() : this.api.getAsk()).subscribe(data => {
       this.stories = data as any[];
-      this.pageStories = this.stories.splice(1, 30);
+      this.pageStories = this.stories.slice(1, 30);
     });
   }
 
