@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {CommentComponent} from './comment/comment.component';
 import { CommentsComponent } from './comments/comments.component';
 import {SharedModule} from '../shared/shared.module';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -10,7 +11,8 @@ import {SharedModule} from '../shared/shared.module';
   declarations: [CommentComponent, CommentsComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   exports: [CommentsComponent]
 })

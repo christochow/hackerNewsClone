@@ -2,7 +2,7 @@
   <td [width]="depth*50 + 'px'"></td>
   <td>
     <table>
-    <tr style="font-size: 12px;color: grey" align="left">{{item.by}}</tr>
+      <tr style="font-size: 12px;color: grey" align="left"><a [routerLink]="['../../user/'+item.by]" routerLinkActive="active">{{item.by}}</a></tr>
     <tr style="font-size: 14px" [innerHTML]="item.text" align="left"></tr>
     </table>
   </td>
