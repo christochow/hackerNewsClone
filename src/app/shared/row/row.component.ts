@@ -20,7 +20,7 @@ export class RowComponent implements OnInit {
 
   isNews: boolean;
 
-  new: object;
+  new = {};
 
   discuss: string;
 
@@ -29,7 +29,6 @@ export class RowComponent implements OnInit {
 
   ngOnInit() {
     this.isNews = this.router.url === '/newest';
-    this.new = {};
     this.api.getItem(this.id).subscribe(r => {
       this.new = r;
       const hasKids = this.new['descendants'] !== undefined && this.new['descendants'] !== null;
