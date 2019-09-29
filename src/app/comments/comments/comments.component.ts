@@ -11,14 +11,12 @@ import {Title} from '@angular/platform-browser';
 })
 export class CommentsComponent implements OnInit {
 
-  @Input()
-  item: object;
+  item: any = {};
 
   constructor(private api: HackerNewsAPIService, private route: ActivatedRoute, private titleService: Title) {
   }
 
   ngOnInit() {
-    this.item = {};
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         this.api.getItem(params.get('id')))

@@ -18,7 +18,7 @@ export class SubmissionComponent implements OnInit {
   @Output()
   disable = new EventEmitter();
 
-  new: object;
+  submission: any = {};
 
   show = false;
 
@@ -28,13 +28,12 @@ export class SubmissionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.new = {};
     this.api.getItem(this.id).subscribe(r => {
-      this.new = r;
-      const hasKids = this.new['descendants'] !== undefined && this.new['descendants'] !== null;
-      this.discuss = (!hasKids || this.new['descendants'] === 0) ?
-        'discuss' : this.new['descendants'] + ' comment' + (this.new['descendants'] === 1 ? '' : 's');
-      this.show = (!this.new['deleted'] === true) && (!this.new['dead'] === true) && (this.new['type'] === 'story');
+      this.submission = r;
+      const hasKids = this.submission['descendants'] !== undefined && this.submission['descendants'] !== null;
+      this.discuss = (!hasKids || this.submission['descendants'] === 0) ?
+        'discuss' : this.submission['descendants'] + ' comment' + (this.submission['descendants'] === 1 ? '' : 's');
+      this.show = (!this.submission['deleted'] === true) && (!this.submission['dead'] === true) && (this.submission['type'] === 'story');
       if (this.show === false) {
         this.disable.emit({id: this.id});
       }

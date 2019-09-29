@@ -14,14 +14,13 @@ export class CommentComponent implements OnInit {
   @Input()
   id: string;
 
-  item: object;
+  item: any = {};
 
   style: object;
 
   constructor(private api: HackerNewsAPIService) { }
 
   ngOnInit() {
-    this.item = {};
     this.style = {
       width: 10 * this.depth + 'px'
     };

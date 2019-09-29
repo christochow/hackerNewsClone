@@ -1,15 +1,15 @@
 <div *ngIf="show">
   <tr align="left" style="margin: 0">
-    <td style="font-size: 15px" *ngIf="new.url === undefined"  [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [routerLink]="['../../../comments/'+new.id]" [routerLinkActive]="new.url !== undefined? 'unactive':'active'"  [href]="new.url">{{new.title}}</a></td>
-    <td style="font-size: 15px" *ngIf="new.url !== undefined"   [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [href]="new.url">{{new.title}}</a></td>
+    <td style="font-size: 15px" *ngIf="submission.url === undefined"  [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [routerLink]="['../../../comments/'+submission.id]" [routerLinkActive]="submission.url !== undefined? 'unactive':'active'"  [href]="submission.url">{{submission.title}}</a></td>
+    <td style="font-size: 15px" *ngIf="submission.url !== undefined"   [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [href]="submission.url">{{submission.title}}</a></td>
   </tr>
   <tr align="left" style="margin: 0;">
     <td>
-      <span style="font-size: 12px;padding-left: 15px;">{{new.score}} points by {{new.by}}</span>
+      <span style="font-size: 12px;padding-left: 15px;">{{submission.score}} points by {{submission.by}}</span>
       <span>|</span>
-      <span style="font-size: 12px;margin: 2px"><a [href]="'https://www.google.com/search?q='+new.title" target="_blank">web</a></span>
+      <span style="font-size: 12px;margin: 2px"><a [href]="'https://www.google.com/search?q='+submission.title" target="_blank">web</a></span>
       <span>|</span>
-      <span style="font-size: 12px;"><a [routerLink]="['../../../comments/'+new.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
+      <span style="font-size: 12px;"><a [routerLink]="['../../../comments/'+submission.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
     </td>
   </tr>
 </div>

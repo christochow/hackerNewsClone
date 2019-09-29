@@ -10,12 +10,11 @@ import {HackerNewsAPIService} from '../../hacker-news-api.service';
 })
 export class UserComponent implements OnInit {
 
-  user: object;
+  user: any = {};
 
   constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService) {}
 
   ngOnInit(): void {
-      this.user = {};
       this.route.paramMap.pipe(
         switchMap((params: ParamMap) =>
           this.api.getUser(params.get('id'))

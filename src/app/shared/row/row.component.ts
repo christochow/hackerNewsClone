@@ -20,7 +20,7 @@ export class RowComponent implements OnInit {
 
   isNews: boolean;
 
-  new = {};
+  new: any = {};
 
   discuss: string;
 
