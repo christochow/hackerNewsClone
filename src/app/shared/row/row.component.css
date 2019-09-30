@@ -4,5 +4,19 @@ a {
 }
 
 span {
+  font-size: 12px;
   padding: 1px;
+}
+
+tr {
+  margin: 0;
+}
+
+.web-link {
+  font-size: 12px;
+  margin: 2px;
+}
+
+.normal-link {
+  padding-left: 15px;
 }
