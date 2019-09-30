@@ -31,9 +31,9 @@ export class RowComponent implements OnInit {
     this.isNews = this.router.url === '/newest';
     this.api.getItem(this.id).subscribe(r => {
       this.new = r;
-      const hasKids = this.new['descendants'] !== undefined && this.new['descendants'] !== null;
-      this.discuss = (!hasKids || this.new['descendants'] === 0) ?
-        'discuss' : this.new['descendants'] + ' comment' + (this.new['descendants'] === 1 ? '' : 's');
+      const hasKids = this.new.descendants !== undefined && this.new.descendants !== null;
+      this.discuss = (!hasKids || this.new.descendants === 0) ?
+        'discuss' : this.new.descendants + ' comment' + (this.new.descendants === 1 ? '' : 's');
     });
   }
 

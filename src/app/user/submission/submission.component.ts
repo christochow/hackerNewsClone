@@ -30,10 +30,10 @@ export class SubmissionComponent implements OnInit {
   ngOnInit() {
     this.api.getItem(this.id).subscribe(r => {
       this.submission = r;
-      const hasKids = this.submission['descendants'] !== undefined && this.submission['descendants'] !== null;
-      this.discuss = (!hasKids || this.submission['descendants'] === 0) ?
-        'discuss' : this.submission['descendants'] + ' comment' + (this.submission['descendants'] === 1 ? '' : 's');
-      this.show = (!this.submission['deleted'] === true) && (!this.submission['dead'] === true) && (this.submission['type'] === 'story');
+      const hasKids = this.submission.descendants !== undefined && this.submission.descendants !== null;
+      this.discuss = (!hasKids || this.submission.descendants === 0) ?
+        'discuss' : this.submission.descendants + ' comment' + (this.submission.descendants === 1 ? '' : 's');
+      this.show = (!this.submission.deleted === true) && (!this.submission.dead === true) && (this.submission.type === 'story');
       if (this.show === false) {
         this.disable.emit({id: this.id});
       }
