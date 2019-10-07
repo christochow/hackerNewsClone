@@ -8,6 +8,10 @@ export class HackerNewsAPIService {
 
   constructor(private http: HttpClient) { }
 
+  getTop(){
+    return this.http.get('https://hacker-news.firebaseio.com/v0/topstories.json');
+  }
+
   getNews(){
     return this.http.get('https://hacker-news.firebaseio.com/v0/newstories.json');
   }
