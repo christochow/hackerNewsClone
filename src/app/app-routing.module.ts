@@ -15,6 +15,7 @@ const routes: Routes = [
   {path: 'newest', component: NewTopComponent},
   {path: 'ask-show', component: AskShowComponent},
   {path: 'show', component: AskShowComponent},
+  {path: 'news', component: NewTopComponent},
   {path: '**', redirectTo: 'news', pathMatch: 'full'}
 ];
 
