@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HackerNewsAPIService} from '../hacker-news-api.service';
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
@@ -8,17 +8,18 @@ import {Router} from '@angular/router';
   templateUrl: './new-top.component.html',
   styleUrls: ['./new-top.component.css']
 })
-export class NewTopComponent implements OnInit{
+export class NewTopComponent implements OnInit {
 
   stories: any[];
   pageStories: any[];
   isTop: boolean;
 
-  constructor(private api: HackerNewsAPIService, private titleService: Title, private router: Router) {}
+  constructor(private api: HackerNewsAPIService, private titleService: Title, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.isTop = this.router.url === '/news';
-    this.titleService.setTitle('Hacker news');
+    this.titleService.setTitle('Hacker news Clone');
     this.isTop ? this.api.getTop().subscribe(data => {
       this.stories = data as any[];
       this.pageStories = this.stories.slice(0, 30);

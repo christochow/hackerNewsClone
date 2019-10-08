@@ -8,16 +8,17 @@ import {HackerNewsAPIService} from './hacker-news-api.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'hackerNewsClone';
   hasUser: boolean;
   id: string;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.hasUser = this.router.url.includes('user/submissions')
-    if (this.hasUser === true){
+    this.hasUser = this.router.url.includes('user/submissions');
+    if (this.hasUser === true) {
       this.route.paramMap.pipe(
         switchMap((params: ParamMap) =>
           params.get('id'))
