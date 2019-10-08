@@ -4,7 +4,7 @@ a {
 }
 
 span {
-  font-size: 12px;
+  font-size: 11px;
   padding: 1px;
 }
 
@@ -19,4 +19,8 @@ tr {
 
 .normal-link {
   padding-left: 15px;
+}
+
+.main-row:hover {
+  background-color: gray;
 }

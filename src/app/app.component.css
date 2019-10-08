@@ -5,14 +5,17 @@ a {
 
 .container {
   text-align: center;
+  table-layout: fixed;
 }
 
 .container-table {
-  width: 85%;
+  min-width: 85%;
+  max-width: 85%;
   display: table;
   background-color: rgb(246, 246, 239);
+  table-layout: fixed;
 }
 
 .title {
-  font-family: Verdana, Geneva, sans-serif;font-weight: bold
+  font-weight: bold
 }
