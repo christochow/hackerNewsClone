@@ -1,4 +1,4 @@
-<div>
+<div [ngClass]="isCommentPage?'':['main-row']">
   <tr align="left">
     <td *ngIf="isCommentPage" width="2.5px"></td>
     <td *ngIf="!isCommentPage && new.url === undefined" style="font-size: 15px" [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [routerLink]="['../comments/'+new.id]" routerLinkActive="active">{{new.title}}</a></td>

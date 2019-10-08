@@ -4,6 +4,7 @@
   <tr class="main-row" align="left">
     <td style="padding-left: 11px" [innerHTML]="item.text" *ngIf="item.text !== undefined"></td>
   </tr>
+  <tr class="separator"></tr>
   <tr app-comment *ngFor="let i of item.kids" [depth]="0" [id]="i"></tr>
   </tbody>
 </table>
