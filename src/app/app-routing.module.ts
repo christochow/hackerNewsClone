@@ -8,12 +8,12 @@ import {SubmissionsComponent} from './user/submissions/submissions.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'newest', pathMatch: 'full'},
+  {path: '', redirectTo: 'news', pathMatch: 'full'},
   {path: 'comments/:id', component: CommentsComponent},
   {path: 'user/:id', component: UserComponent},
   {path: 'user/submissions/:id', component: SubmissionsComponent},
   {path: 'newest', component: NewTopComponent},
-  {path: 'ask-show', component: AskShowComponent},
+  {path: 'ask', component: AskShowComponent},
   {path: 'show', component: AskShowComponent},
   {path: 'news', component: NewTopComponent},
   {path: '**', redirectTo: 'news', pathMatch: 'full'}
