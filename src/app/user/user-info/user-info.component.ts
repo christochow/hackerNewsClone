@@ -20,9 +20,14 @@ export class UserInfoComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         this.api.getUser(params.get('id'))
-      )).subscribe(data => this.user = data,
-      err => console.log(err),
-      () => this.ready = true
+      )).subscribe(data => {
+        this.user = data;
+        this.ready = true;
+        },
+      err => {
+        console.log(err);
+        this.ready = true;
+      }
     );
   }
 

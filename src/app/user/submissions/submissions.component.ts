@@ -28,9 +28,12 @@ export class SubmissionsComponent implements OnInit {
       )).subscribe(data => {
         this.user = data;
         this.submissions = this.user.submitted;
+        this.ready = true;
       },
-      err => console.log(err),
-      () => this.ready = true);
+      err => {
+        console.log(err);
+        this.ready = true;
+      });
   }
 
 }
