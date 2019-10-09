@@ -18,9 +18,17 @@ tr {
 }
 
 .normal-link {
-  padding-left: 15px;
+  padding-left: 25px;
 }
 
 .main-row:hover {
-  background-color: gray;
+  background-color: gainsboro;
+}
+
+.comment-row {
+  line-height: 17px;
+}
+
+.info-row {
+  color: gray;
 }

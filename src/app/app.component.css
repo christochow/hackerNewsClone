@@ -19,3 +19,7 @@ a {
 .title {
   font-weight: bold
 }
+
+.header {
+  line-height: 24px;
+}
