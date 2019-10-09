@@ -22,9 +22,11 @@ export class NewTopComponent implements OnInit {
     this.isTop = this.router.url === '/news';
     this.titleService.setTitle('Hacker news Clone');
     this.isTop ? this.api.getTop().subscribe(data => {
-      this.stories = data as any[];
-      this.pageStories = this.stories.slice(0, 30);
-    }) : this.api.getNews().subscribe(data => {
+        this.stories = data as any[];
+        this.pageStories = this.stories.slice(0, 30);
+      },
+      err => console.log(err),
+      () => this.ready = true) : this.api.getNews().subscribe(data => {
         this.stories = data as any[];
         this.pageStories = this.stories.slice(0, 30);
       },
