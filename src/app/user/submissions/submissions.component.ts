@@ -10,9 +10,10 @@ import {switchMap} from 'rxjs/operators';
 })
 export class SubmissionsComponent implements OnInit {
 
-  user: object;
+  user: any;
   submissions = [];
   onDisable;
+  ready = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService) {
     this.onDisable = ($event, array) => {
@@ -25,8 +26,9 @@ export class SubmissionsComponent implements OnInit {
       switchMap((params: ParamMap) =>
         this.api.getUser(params.get('id'))
       )).subscribe(data => {
-      this.user = data;
-      this.submissions = this.user['submitted'];
+        this.ready = true;
+        this.user = data;
+        this.submissions = this.user.submitted;
     });
   }
 

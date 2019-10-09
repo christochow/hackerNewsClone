@@ -12,6 +12,7 @@ import {Title} from '@angular/platform-browser';
 export class CommentsComponent implements OnInit {
 
   item: any = {};
+  ready = false;
 
   constructor(private api: HackerNewsAPIService, private route: ActivatedRoute, private titleService: Title) {
   }
@@ -21,6 +22,7 @@ export class CommentsComponent implements OnInit {
       switchMap((params: ParamMap) =>
         this.api.getItem(params.get('id')))
     ).subscribe(data => {
+      this.ready = true;
       this.item = data;
       this.titleService.setTitle(this.item['title']);
     });

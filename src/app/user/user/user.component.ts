@@ -11,6 +11,7 @@ import {HackerNewsAPIService} from '../../hacker-news-api.service';
 export class UserComponent implements OnInit {
 
   user: any = {};
+  ready = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService) {}
 
@@ -19,6 +20,7 @@ export class UserComponent implements OnInit {
         switchMap((params: ParamMap) =>
           this.api.getUser(params.get('id'))
       )).subscribe(data => {
+        this.ready = true;
         this.user = data;
       });
   }

@@ -6,5 +6,8 @@
   </tr>
   <tr class="separator"></tr>
   <tr app-comment *ngFor="let i of item.kids" [depth]="0" [id]="i"></tr>
+  <tr *ngIf="ready" style="height: 10px;"><td></td></tr>
+  <tr *ngIf="ready" style="height: 2px;"><td style="background-color: rgb(255, 102, 0);"></td></tr>
+  <tr *ngIf="ready" style="height: 50px;"><td></td></tr>
   </tbody>
 </table>

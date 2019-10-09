@@ -13,6 +13,7 @@ export class AskShowComponent implements OnInit{
   stories: any[];
   pageStories: any[];
   isShow: boolean;
+  ready = false;
 
   constructor(private api: HackerNewsAPIService, private router: Router, private titleService: Title) {
   }
@@ -21,6 +22,7 @@ export class AskShowComponent implements OnInit{
     this.isShow = this.router.url === '/show';
     this.titleService.setTitle(this.isShow ? 'Show' : 'Ask');
     (this.isShow ? this.api.getShow() : this.api.getAsk()).subscribe(data => {
+      this.ready = true;
       this.stories = data as any[];
       this.pageStories = this.stories.slice(0, 30);
     });

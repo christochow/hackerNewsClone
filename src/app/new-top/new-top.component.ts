@@ -13,6 +13,7 @@ export class NewTopComponent implements OnInit {
   stories: any[];
   pageStories: any[];
   isTop: boolean;
+  ready = false;
 
   constructor(private api: HackerNewsAPIService, private titleService: Title, private router: Router) {
   }
@@ -21,6 +22,7 @@ export class NewTopComponent implements OnInit {
     this.isTop = this.router.url === '/news';
     this.titleService.setTitle('Hacker news Clone');
     this.isTop ? this.api.getTop().subscribe(data => {
+      this.ready = true;
       this.stories = data as any[];
       this.pageStories = this.stories.slice(0, 30);
     }) : this.api.getNews().subscribe(data => {
