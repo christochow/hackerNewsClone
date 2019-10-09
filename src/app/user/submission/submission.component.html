@@ -5,7 +5,7 @@
   </tr>
   <tr align="left" style="margin: 0;">
     <td>
-      <span style="font-size: 12px;padding-left: 15px;">{{submission.score}} points by {{submission.by}}</span>
+      <span style="font-size: 12px;padding-left: 15px;">{{submission.score}} points by <a [routerLink]="['../']">{{submission.by}}</a></span>
       <span>|</span>
       <span style="font-size: 12px;margin: 2px"><a [href]="'https://www.google.com/search?q='+submission.title" target="_blank">web</a></span>
       <span>|</span>
