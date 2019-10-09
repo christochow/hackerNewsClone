@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.hasUser = this.router.url.includes('user/submissions');
+    this.hasUser = this.router.url.includes('user-info/submissions');
     if (this.hasUser === true) {
       this.route.paramMap.pipe(
         switchMap((params: ParamMap) =>

@@ -26,10 +26,11 @@ export class SubmissionsComponent implements OnInit {
       switchMap((params: ParamMap) =>
         this.api.getUser(params.get('id'))
       )).subscribe(data => {
-        this.ready = true;
         this.user = data;
         this.submissions = this.user.submitted;
-    });
+      },
+      err => console.log(err),
+      () => this.ready = true);
   }
 
 }

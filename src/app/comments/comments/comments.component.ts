@@ -22,10 +22,11 @@ export class CommentsComponent implements OnInit {
       switchMap((params: ParamMap) =>
         this.api.getItem(params.get('id')))
     ).subscribe(data => {
-      this.ready = true;
-      this.item = data;
-      this.titleService.setTitle(this.item['title']);
-    });
+        this.item = data;
+        this.titleService.setTitle(this.item.title);
+      },
+      err => console.log(err),
+      () => this.ready = true);
   }
 
 }

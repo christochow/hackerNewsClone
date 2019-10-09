@@ -8,7 +8,7 @@ import {Title} from '@angular/platform-browser';
   templateUrl: './ask-show.component.html',
   styleUrls: ['./ask-show.component.css']
 })
-export class AskShowComponent implements OnInit{
+export class AskShowComponent implements OnInit {
 
   stories: any[];
   pageStories: any[];
@@ -22,10 +22,11 @@ export class AskShowComponent implements OnInit{
     this.isShow = this.router.url === '/show';
     this.titleService.setTitle(this.isShow ? 'Show' : 'Ask');
     (this.isShow ? this.api.getShow() : this.api.getAsk()).subscribe(data => {
-      this.ready = true;
-      this.stories = data as any[];
-      this.pageStories = this.stories.slice(0, 30);
-    });
+        this.stories = data as any[];
+        this.pageStories = this.stories.slice(0, 30);
+      },
+      err => console.log(err),
+      () => this.ready = true);
   }
 
 }
