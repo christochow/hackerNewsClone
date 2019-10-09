@@ -5,10 +5,10 @@ import {HackerNewsAPIService} from '../../hacker-news-api.service';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  templateUrl: './user-info.component.html',
+  styleUrls: ['./user-info.component.css']
 })
-export class UserComponent implements OnInit {
+export class UserInfoComponent implements OnInit {
 
   user: any = {};
   ready = false;
