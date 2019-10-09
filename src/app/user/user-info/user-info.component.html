@@ -3,7 +3,7 @@
   <tr><td width="10px;">user: </td>  <td class="header">{{user.id}}</td></tr>
   <tr><td width="10px;">karma:</td> <td class="header">{{user.karma}}</td></tr>
   <tr><td width="10px;" valign="top">about:</td> <td class="header" [innerHTML]="user.about"></td></tr>
-  <tr><td width="10px;"></td> <td class="header"><a [routerLink]="'../submissions/' + user.id">submissions</a></td></tr>
+  <tr><td width="10px;"></td> <td class="header"><a [routerLink]="'submissions'">submissions</a></td></tr>
   <tr *ngIf="ready" style="height: 10px;"><td></td></tr>
   <tr *ngIf="ready" style="height: 2px;"><td style="background-color: rgb(255, 102, 0);"></td><td style="background-color: rgb(255, 102, 0);width: 100%"></td></tr>
   <tr *ngIf="ready" style="height: 50px;"><td></td></tr>

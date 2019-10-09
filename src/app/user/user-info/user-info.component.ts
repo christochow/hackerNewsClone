@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
@@ -13,16 +13,17 @@ export class UserComponent implements OnInit {
   user: any = {};
   ready = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService) {
+  }
 
   ngOnInit(): void {
-      this.route.paramMap.pipe(
-        switchMap((params: ParamMap) =>
-          this.api.getUser(params.get('id'))
-      )).subscribe(data => {
-        this.ready = true;
-        this.user = data;
-      });
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this.api.getUser(params.get('id'))
+      )).subscribe(data => this.user = data,
+      err => console.log(err),
+      () => this.ready = true
+    );
   }
 
 }
