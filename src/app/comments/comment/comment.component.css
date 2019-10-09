@@ -10,10 +10,12 @@ td {
 
 .table-row {
   color: grey;
+  height: 16px;
 }
 
 .text {
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 17px;
 }
 
 .main-row {
