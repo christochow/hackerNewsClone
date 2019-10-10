@@ -2,12 +2,25 @@
   <tbody>
   <app-row *ngIf="item.id" [isCommentPage]="true" [id]="item.id"></app-row>
   <tr class="main-row" align="left">
-    <td style="padding-left: 11px;border-bottom: 0.5pt solid grey;" [innerHTML]="item.text" *ngIf="item.text !== undefined"></td>
+    <td style="padding-left: 11px;border-bottom: 0.5pt solid grey;" [innerHTML]="item.text"
+        *ngIf="item.text !== undefined"></td>
   </tr>
   <tr class="separator"></tr>
-  <tr app-comment *ngFor="let i of item.kids" [depth]="0" [id]="i"></tr>
-  <tr *ngIf="ready" style="height: 10px;"><td></td></tr>
-  <tr *ngIf="ready" style="height: 2px;"><td style="background-color: rgb(255, 102, 0);"></td></tr>
-  <tr *ngIf="ready" style="height: 50px;"><td></td></tr>
+  <tr app-comment *ngFor="let i of item.kids.slice(40*(page-1), 40*page)" [depth]="0" [id]="i"
+      (onDisable)="item.kids = onDisable($event, item.kids)"></tr>
+  <tr *ngIf="ready && item.kids.slice(40*(page)).length > 0" style="height: 10px;" align="left">
+    <td>
+      <a [routerLink]="['../'+item.id]" [queryParams]="{p:page+1}" routerLinkActive="active">...more</a>
+    </td>
+  </tr>
+  <tr *ngIf="ready" style="height: 10px;">
+    <td></td>
+  </tr>
+  <tr *ngIf="ready" style="height: 2px;">
+    <td style="background-color: rgb(255, 102, 0);"></td>
+  </tr>
+  <tr *ngIf="ready" style="height: 50px;">
+    <td></td>
+  </tr>
   </tbody>
 </table>

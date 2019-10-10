@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
 
 @Component({
@@ -14,11 +14,15 @@ export class CommentComponent implements OnInit {
   @Input()
   id: string;
 
+  @Output()
+  onDisable = new EventEmitter();
+
   item: any = {};
 
   style: object;
 
-  constructor(private api: HackerNewsAPIService) { }
+  constructor(private api: HackerNewsAPIService) {
+  }
 
   ngOnInit() {
     this.style = {
@@ -26,6 +30,9 @@ export class CommentComponent implements OnInit {
     };
     this.api.getItem(this.id).subscribe(data => {
       this.item = data;
+      if (this.item === null || this.item.dead === true || this.item.deleted === true) {
+        this.onDisable.emit({id: this.id});
+      }
     });
   }
 
