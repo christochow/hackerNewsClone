@@ -3,13 +3,13 @@
     <td style="font-size: 15px" *ngIf="submission.url === undefined"  [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [routerLink]="['../../../comments/'+submission.id]" [routerLinkActive]="submission.url !== undefined? 'unactive':'active'"  [href]="submission.url">{{submission.title}}</a></td>
     <td style="font-size: 15px" *ngIf="submission.url !== undefined"   [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [href]="submission.url">{{submission.title}}</a></td>
   </tr>
-  <tr align="left" style="margin: 0;">
+  <tr align="left" style="margin: 0;color: grey">
     <td>
-      <span style="font-size: 12px;padding-left: 15px;">{{submission.score}} points by <a [routerLink]="['../']">{{submission.by}}</a></span>
+      <span style="padding-left: 25px;">{{submission.score}} points by <a class="info-link" [routerLink]="['../']">{{submission.by}}</a></span>
       <span>|</span>
-      <span style="font-size: 12px;margin: 2px"><a [href]="'https://www.google.com/search?q='+submission.title" target="_blank">web</a></span>
+      <span style="margin: 2px"><a class="info-link" [href]="'https://www.google.com/search?q='+submission.title" target="_blank">web</a></span>
       <span>|</span>
-      <span style="font-size: 12px;"><a [routerLink]="['../../../comments/'+submission.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
+      <span><a class="info-link" [routerLink]="['../../../comments/'+submission.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
     </td>
   </tr>
 </div>

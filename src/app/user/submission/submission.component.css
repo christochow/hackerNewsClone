@@ -3,6 +3,15 @@ a {
   color: black;
 }
 
+a.info-link {
+  color: grey;
+}
+
 span {
+  font-size: 11px;
   padding: 1px;
+}
+
+div:hover {
+  background-color: gainsboro;
 }
