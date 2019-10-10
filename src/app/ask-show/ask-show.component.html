@@ -1,10 +1,22 @@
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tbody>
-  <tr *ngFor="let s of pageStories let i = index">
-    <app-row [id]="s" [index] = i+1></app-row>
+  <tr *ngFor="let s of stories.slice(30*(page-1), 30*page) let i = index">
+    <app-row [id]="s" [index]=i+1 (disable)="stories = onDisable($event, stories)"
+             (listFull)="listFull = true;"></app-row>
   </tr>
-  <tr *ngIf="ready" style="height: 10px;"><td></td></tr>
-  <tr *ngIf="ready" style="height: 2px;"><td style="background-color: rgb(255, 102, 0);"></td></tr>
-  <tr *ngIf="ready" style="height: 50px;"><td></td></tr>
+  <tr *ngIf="ready && listFull && stories.slice(30*(page)).length > 0" style="height: 10px;" align="left">
+    <td>
+      <a [routerLink]="['../submissions']" [queryParams]="{p:page+1}" routerLinkActive="active">...more</a>
+    </td>
+  </tr>
+  <tr *ngIf="ready" style="height: 10px;">
+    <td></td>
+  </tr>
+  <tr *ngIf="ready" style="height: 2px;">
+    <td style="background-color: rgb(255, 102, 0);"></td>
+  </tr>
+  <tr *ngIf="ready" style="height: 50px;">
+    <td></td>
+  </tr>
   </tbody>
 </table>

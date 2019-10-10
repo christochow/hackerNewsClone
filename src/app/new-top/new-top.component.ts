@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HackerNewsAPIService} from '../hacker-news-api.service';
 import {Title} from '@angular/platform-browser';
-import {Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-new',
@@ -10,28 +11,40 @@ import {Router} from '@angular/router';
 })
 export class NewTopComponent implements OnInit {
 
-  stories: any[];
-  pageStories: any[];
+  stories: any[] = [];
   isTop: boolean;
   ready = false;
+  listFull = false;
+  page = 1;
+  onDisable = ($event, array) => array.filter(e => e !== $event.id);
+  getData = (page) => {
+    if (page !== undefined) {
+      const temp = parseInt(page, 10);
+      if (!(isNaN(temp) || temp < 1)) {
+        this.page = temp;
+      }
+    }
+    return this.isTop ? this.api.getTop() : this.api.getNews();
+  };
 
-  constructor(private api: HackerNewsAPIService, private titleService: Title, private router: Router) {
+  constructor(private api: HackerNewsAPIService, private titleService: Title, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.isTop = this.router.url === '/news';
     this.titleService.setTitle('Hacker news Clone');
-    this.isTop ? this.api.getTop().subscribe(data => {
-        this.stories = data as any[];
-        this.pageStories = this.stories.slice(0, 30);
-      },
-      err => console.log(err),
-      () => this.ready = true) : this.api.getNews().subscribe(data => {
-        this.stories = data as any[];
-        this.pageStories = this.stories.slice(0, 30);
-      },
-      err => console.log(err),
-      () => this.ready = true);
+    this.route.queryParamMap.pipe(
+      mergeMap((param: ParamMap) => this.getData(param.get('p')))
+    )
+      .subscribe(data => {
+          this.listFull = false;
+          this.stories = data as any[];
+          this.ready = true;
+        },
+        err => {
+          console.log(err);
+          this.ready = true;
+        });
   }
 
 }

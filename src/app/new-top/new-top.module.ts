@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewTopComponent } from './new-top.component';
 import {SharedModule} from '../shared/shared.module';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -9,7 +10,8 @@ import {SharedModule} from '../shared/shared.module';
   declarations: [NewTopComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   exports: [NewTopComponent],
 })

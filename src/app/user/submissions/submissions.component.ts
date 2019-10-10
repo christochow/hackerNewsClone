@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
-import {switchMap} from 'rxjs/operators';
+import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-submissions',
@@ -12,23 +12,31 @@ export class SubmissionsComponent implements OnInit {
 
   user: any;
   submissions = [];
-  onDisable;
+  page = 1;
   ready = false;
+  listFull = false;
+  onDisable = ($event, array) => array.filter(e => e !== $event.id);
+  getDataAndSetPage = (page, id) => {
+    if (page !== undefined){
+      const temp = parseInt(page, 10);
+      if (!(isNaN(temp) || temp < 1 )) {
+        this.page = temp;
+      }
+    }
+    return this.api.getUser(id);
+  };
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService) {
-    this.onDisable = ($event, array) => {
-      return array.filter(e => e !== $event.id);
-    };
-  }
+  constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService) {}
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.api.getUser(params.get('id'))
+    this.route.queryParamMap.pipe(
+      mergeMap((params: ParamMap) =>
+        this.getDataAndSetPage(params.get('p'), this.route.snapshot.paramMap.get('id'))
       )).subscribe(data => {
         this.user = data;
         this.submissions = this.user.submitted;
         this.ready = true;
+        this.listFull = false;
       },
       err => {
         console.log(err);
