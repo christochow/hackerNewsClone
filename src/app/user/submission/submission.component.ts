@@ -32,6 +32,10 @@ export class SubmissionComponent implements OnInit {
 
   ngOnInit() {
     this.api.getItem(this.id).subscribe(r => {
+      if (r === null) {
+        this.disable.emit({id: this.id});
+        return;
+      }
       this.submission = r;
       const hasKids = this.submission.descendants !== undefined && this.submission.descendants !== null;
       this.discuss = (!hasKids || this.submission.descendants === 0) ?
@@ -39,7 +43,7 @@ export class SubmissionComponent implements OnInit {
       this.show = (!this.submission.deleted === true) && (!this.submission.dead === true) && (this.submission.type === 'story');
       if (this.show === false) {
         this.disable.emit({id: this.id});
-      } else if (this.index === 30) {
+      } else if (this.index % 30 === 0) {
         this.listFull.emit();
       }
     });

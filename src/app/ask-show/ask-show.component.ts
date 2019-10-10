@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HackerNewsAPIService} from '../hacker-news-api.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {mergeMap} from 'rxjs/operators';
+import {mergeMap, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-ask',
@@ -18,11 +18,16 @@ export class AskShowComponent implements OnInit {
   page = 1;
   onDisable = ($event, array) => array.filter(e => e !== $event.id);
   getData = (page) => {
-    if (page !== undefined) {
+    if (page !== undefined && page !== null) {
       const temp = parseInt(page, 10);
       if (!(isNaN(temp) || temp < 1)) {
+        if (temp > this.page) {
+          window.scroll(0, 0);
+        }
         this.page = temp;
       }
+    } else {
+      this.page = 1;
     }
     return this.isShow ? this.api.getShow() : this.api.getAsk();
   };
@@ -34,15 +39,15 @@ export class AskShowComponent implements OnInit {
     this.isShow = this.router.url === '/show';
     this.titleService.setTitle(this.isShow ? 'Show' : 'Ask');
     this.route.queryParamMap.pipe(
-      mergeMap((param: ParamMap) => this.getData(param.get('id')))
+      switchMap((param: ParamMap) => this.getData(param.get('id')))
     ).subscribe(data => {
         this.stories = data as any[];
         this.ready = true;
         this.listFull = false;
       },
       err => {
-      console.log(err);
-      this.ready = true;
+        console.log(err);
+        this.ready = true;
       });
   }
 

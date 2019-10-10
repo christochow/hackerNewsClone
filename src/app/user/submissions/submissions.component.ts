@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
-import {mergeMap} from 'rxjs/operators';
+import {mergeMap, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-submissions',
@@ -17,20 +17,26 @@ export class SubmissionsComponent implements OnInit {
   listFull = false;
   onDisable = ($event, array) => array.filter(e => e !== $event.id);
   getDataAndSetPage = (page, id) => {
-    if (page !== undefined){
+    if (page !== undefined && page !== null) {
       const temp = parseInt(page, 10);
-      if (!(isNaN(temp) || temp < 1 )) {
+      if (!(isNaN(temp) || temp < 1)) {
+        if (temp > this.page) {
+          window.scroll(0, 0);
+        }
         this.page = temp;
       }
+    } else {
+      this.page = 1;
     }
     return this.api.getUser(id);
   };
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService) {
+  }
 
   ngOnInit(): void {
     this.route.queryParamMap.pipe(
-      mergeMap((params: ParamMap) =>
+      switchMap((params: ParamMap) =>
         this.getDataAndSetPage(params.get('p'), this.route.snapshot.paramMap.get('id'))
       )).subscribe(data => {
         this.user = data;

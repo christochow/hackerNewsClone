@@ -37,18 +37,21 @@ export class RowComponent implements OnInit {
     this.isNews = this.router.url === '/newest';
     this.api.getItem(this.id).subscribe(r => {
       this.new = r;
+      if (r === null) {
+        this.disable.emit({id: this.id});
+        return;
+      }
       const hasKids = this.new.descendants !== undefined && this.new.descendants !== null;
       this.discuss = (!hasKids || this.new.descendants === 0) ?
         'discuss' : this.new.descendants + ' comment' + (this.new.descendants === 1 ? '' : 's');
       const show = (!this.new.deleted === true) && (!this.new.dead === true);
       if (show === false) {
         this.disable.emit({id: this.id});
-      } else if (this.index === 30) {
+      } else if (this.index % 30 === 0) {
         this.listFull.emit();
       }
     });
   }
-
 
 
 }

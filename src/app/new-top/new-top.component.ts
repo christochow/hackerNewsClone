@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HackerNewsAPIService} from '../hacker-news-api.service';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {mergeMap} from 'rxjs/operators';
+import {mergeMap, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-new',
@@ -18,11 +18,16 @@ export class NewTopComponent implements OnInit {
   page = 1;
   onDisable = ($event, array) => array.filter(e => e !== $event.id);
   getData = (page) => {
-    if (page !== undefined) {
+    if (page !== undefined && page !== null) {
       const temp = parseInt(page, 10);
       if (!(isNaN(temp) || temp < 1)) {
+        if (temp > this.page) {
+          window.scroll(0, 0);
+        }
         this.page = temp;
       }
+    } else {
+      this.page = 1;
     }
     return this.isTop ? this.api.getTop() : this.api.getNews();
   };
@@ -34,7 +39,7 @@ export class NewTopComponent implements OnInit {
     this.isTop = this.router.url === '/news';
     this.titleService.setTitle('Hacker news Clone');
     this.route.queryParamMap.pipe(
-      mergeMap((param: ParamMap) => this.getData(param.get('p')))
+      switchMap((param: ParamMap) => this.getData(param.get('p')))
     )
       .subscribe(data => {
           this.listFull = false;
