@@ -18,6 +18,9 @@ export class SubmissionComponent implements OnInit {
   @Output()
   disable = new EventEmitter();
 
+  @Output()
+  listFull = new EventEmitter();
+
   submission: any = {};
 
   show = false;
@@ -36,6 +39,8 @@ export class SubmissionComponent implements OnInit {
       this.show = (!this.submission.deleted === true) && (!this.submission.dead === true) && (this.submission.type === 'story');
       if (this.show === false) {
         this.disable.emit({id: this.id});
+      } else if (this.index === 30) {
+        this.listFull.emit();
       }
     });
   }
