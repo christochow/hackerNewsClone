@@ -20,9 +20,9 @@
           <td style="vertical-align: center;">
               <a style="padding-left: 5px;padding-right: 5px" routerLink="show" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">show</a>
           </td>
-          <span *ngIf="hasUser">|</span>
+          <td *ngIf="hasUser" style="vertical-align: center;">|</td>
           <td *ngIf="hasUser">
-            <div style="padding-left: 5px;padding-right: 5px">
+            <div style="padding-left: 5px;padding-right: 5px;color: white">
               {{id+"'s submissions"}}
             </div>
           </td>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, ParamMap, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +14,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.hasUser = this.router.url.includes('submissions');
-    if (this.hasUser === true) {
-      this.id = this.route.snapshot.paramMap.get('id');
-    }
+    this.router.events.subscribe(
+      value => {
+        if (value instanceof NavigationEnd) {
+          this.hasUser = value.url.includes('submissions');
+          if (this.hasUser === true) {
+            this.id = value.url.split('/')[2];
+          }
+        }
+      }
+    );
   }
 }
