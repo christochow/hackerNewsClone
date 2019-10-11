@@ -29,7 +29,7 @@ export class SubmissionsComponent implements OnInit {
     } else {
       this.page = 1;
     }
-    return this.api.getUser(id);
+    return this.ready ? this.user : this.api.getUser(id);
   };
 
   constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService, private title: Title) {

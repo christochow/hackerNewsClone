@@ -29,7 +29,7 @@ export class NewTopComponent implements OnInit {
     } else {
       this.page = 1;
     }
-    return this.isTop ? this.api.getTop() : this.api.getNews();
+    return this.ready ? this.stories : (this.isTop ? this.api.getTop() : this.api.getNews());
   };
 
   constructor(private api: HackerNewsAPIService, private titleService: Title, private router: Router, private route: ActivatedRoute) {

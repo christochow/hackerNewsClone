@@ -29,7 +29,7 @@ export class AskShowComponent implements OnInit {
     } else {
       this.page = 1;
     }
-    return this.isShow ? this.api.getShow() : this.api.getAsk();
+    return this.ready ? this.stories : (this.isShow ? this.api.getShow() : this.api.getAsk());
   };
 
   constructor(private api: HackerNewsAPIService, private router: Router, private titleService: Title, private route: ActivatedRoute) {

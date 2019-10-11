@@ -10,11 +10,8 @@
         [style.padding-left]="index < 10? '8px' : '0'">
       {{index}}. <a [href]="new.url">{{new.title}}</a>
     </td>
-    <td *ngIf="isCommentPage && new.url === undefined" style="font-size: 16px;">
-      <a [routerLink]="[]"
-         routerLinkActive="active"
-         [href]="new.url">{{new.title}}
-      </a>
+    <td *ngIf="isCommentPage && new.url === undefined" style="color:black;font-size: 16px;">
+      {{new.title}}
     </td>
     <td *ngIf="isCommentPage && new.url !== undefined" style="font-size: 16px;">
       <a [href]="new.url">{{new.title}}

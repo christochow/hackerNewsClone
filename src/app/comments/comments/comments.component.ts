@@ -27,7 +27,7 @@ export class CommentsComponent implements OnInit {
     } else {
       this.page = 1;
     }
-    return this.api.getItem(this.route.snapshot.paramMap.get('id'));
+    return this.ready ? this.item : this.api.getItem(this.route.snapshot.paramMap.get('id'));
   };
 
   constructor(private api: HackerNewsAPIService, private route: ActivatedRoute, private titleService: Title) {
