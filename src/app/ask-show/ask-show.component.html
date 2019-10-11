@@ -6,7 +6,7 @@
   </tr>
   <tr *ngIf="ready && listFull && stories.slice(30*(page)).length > 0" style="height: 10px;" align="left">
     <td>
-      <a [routerLink]="['../submissions']" [queryParams]="{p:page+1}" routerLinkActive="active">...more</a>
+      <a [routerLink]="[]" [queryParams]="{p:page+1}" routerLinkActive="active">...more</a>
     </td>
   </tr>
   <tr *ngIf="ready" style="height: 10px;">

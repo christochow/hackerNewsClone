@@ -3,7 +3,7 @@
   <app-submission *ngFor="let s of submissions.slice(30*(page-1),30*page) let i = index" [id]="s" [index] = "30*(page-1)+i+1"
     (disable)="submissions = onDisable($event, submissions)" (listFull)="listFull = true"></app-submission>
   <tr *ngIf="ready && listFull && submissions.slice(30*page).length > 0" style="height: 10px;" align="left"><td>
-    <a [routerLink]="['../submissions']" [queryParams]="{p:page+1}" routerLinkActive="active">...more</a>
+    <a [routerLink]="[]" [queryParams]="{p:page+1}" routerLinkActive="active">...more</a>
   </td></tr>
   <tr *ngIf="ready" style="height: 10px;"><td></td></tr>
   <tr *ngIf="ready" style="height: 2px;"><td style="background-color: rgb(255, 102, 0);"></td></tr>
