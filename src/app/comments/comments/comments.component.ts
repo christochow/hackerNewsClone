@@ -38,7 +38,7 @@ export class CommentsComponent implements OnInit {
       switchMap((param: ParamMap) => this.getData(param.get('p')))
     ).subscribe(data => {
         this.item = data;
-        this.titleService.setTitle(this.item.title);
+        this.titleService.setTitle(this.item.title + ' | HNC');
         this.ready = true;
       },
       err => {

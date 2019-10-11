@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {switchMap} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {HackerNewsAPIService} from './hacker-news-api.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +7,6 @@ import {HackerNewsAPIService} from './hacker-news-api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'hackerNewsClone';
   hasUser: boolean;
   id: string;
 
@@ -17,14 +14,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.hasUser = this.router.url.includes('user-info/submissions');
+    this.hasUser = this.router.url.includes('submissions');
     if (this.hasUser === true) {
-      this.route.paramMap.pipe(
-        switchMap((params: ParamMap) =>
-          params.get('id'))
-      ).subscribe(data => {
-        this.id = data;
-      });
+      this.id = this.route.snapshot.paramMap.get('id');
     }
   }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
 import {mergeMap, switchMap} from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-submissions',
@@ -31,13 +32,15 @@ export class SubmissionsComponent implements OnInit {
     return this.api.getUser(id);
   };
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService) {
+  constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService, private title: Title) {
   }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.title.setTitle(`${id}'s submissions | HNC`);
     this.route.queryParamMap.pipe(
       switchMap((params: ParamMap) =>
-        this.getDataAndSetPage(params.get('p'), this.route.snapshot.paramMap.get('id'))
+        this.getDataAndSetPage(params.get('p'), id)
       )).subscribe(data => {
         this.user = data;
         this.submissions = this.user.submitted;

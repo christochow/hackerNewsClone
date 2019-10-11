@@ -37,7 +37,7 @@ export class NewTopComponent implements OnInit {
 
   ngOnInit(): void {
     this.isTop = this.router.url === '/news';
-    this.titleService.setTitle('Hacker news Clone');
+    this.titleService.setTitle(this.isTop ? 'Hacker news Clone' : 'New stories | HNC');
     this.route.queryParamMap.pipe(
       switchMap((param: ParamMap) => this.getData(param.get('p')))
     )
