@@ -12,3 +12,7 @@ a {
   color: gray;
   font-size: 14px;
 }
+
+table {
+  width: 100%;
+}

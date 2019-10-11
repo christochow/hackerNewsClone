@@ -38,6 +38,9 @@ export class CommentsComponent implements OnInit {
       switchMap((param: ParamMap) => this.getData(param.get('p')))
     ).subscribe(data => {
         this.item = data;
+        if (this.item.kids === undefined) {
+          this.item.kids = [];
+        }
         this.titleService.setTitle(this.item.title + ' | HNC');
         this.ready = true;
       },
