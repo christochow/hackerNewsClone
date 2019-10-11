@@ -39,7 +39,7 @@ export class AskShowComponent implements OnInit {
     this.isShow = this.router.url === '/show';
     this.titleService.setTitle((this.isShow ? 'Show stories' : 'Ask stories') + ' | HNC');
     this.route.queryParamMap.pipe(
-      switchMap((param: ParamMap) => this.getData(param.get('id')))
+      switchMap((param: ParamMap) => this.getData(param.get('p')))
     ).subscribe(data => {
         this.stories = data as any[];
         this.ready = true;
