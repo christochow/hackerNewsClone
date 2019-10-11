@@ -3,6 +3,7 @@ import {HackerNewsAPIService} from '../hacker-news-api.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {mergeMap, switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-ask',
@@ -29,7 +30,7 @@ export class AskShowComponent implements OnInit {
     } else {
       this.page = 1;
     }
-    return this.ready ? this.stories : (this.isShow ? this.api.getShow() : this.api.getAsk());
+    return this.ready ? of(this.stories) : (this.isShow ? this.api.getShow() : this.api.getAsk());
   };
 
   constructor(private api: HackerNewsAPIService, private router: Router, private titleService: Title, private route: ActivatedRoute) {

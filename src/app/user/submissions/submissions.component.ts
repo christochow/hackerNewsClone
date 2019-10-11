@@ -3,6 +3,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
 import {mergeMap, switchMap} from 'rxjs/operators';
 import {Title} from '@angular/platform-browser';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-submissions',
@@ -29,7 +30,7 @@ export class SubmissionsComponent implements OnInit {
     } else {
       this.page = 1;
     }
-    return this.ready ? this.user : this.api.getUser(id);
+    return this.ready ? of(this.user) : this.api.getUser(id);
   };
 
   constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService, private title: Title) {
