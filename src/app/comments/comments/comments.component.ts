@@ -3,6 +3,7 @@ import {HackerNewsAPIService} from '../../hacker-news-api.service';
 import {mergeMap, switchMap} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Title} from '@angular/platform-browser';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-comments',
@@ -14,6 +15,7 @@ export class CommentsComponent implements OnInit {
   item: any = {kids: []};
   ready = false;
   page = 1;
+  subscription;
   onDisable = ($event, array) => array.filter(e => e !== $event.id);
   getData = (page) => {
     if (page !== undefined && page !== null) {
@@ -27,27 +29,34 @@ export class CommentsComponent implements OnInit {
     } else {
       this.page = 1;
     }
-    return this.ready ? this.item : this.api.getItem(this.route.snapshot.paramMap.get('id'));
+    return this.ready ? of(this.item) : this.api.getItem(this.route.snapshot.paramMap.get('id'));
+  };
+  subscribe = () => this.route.queryParamMap.pipe(
+    switchMap((param: ParamMap) => this.getData(param.get('p')))
+  ).subscribe(data => {
+      this.item = data;
+      if (this.item.kids === undefined) {
+        this.item.kids = [];
+      }
+      this.titleService.setTitle(this.item.title + ' | HNC');
+      this.ready = true;
+    },
+    err => {
+      console.log(err);
+      this.ready = true;
+    });
+  refresh = () => {
+    this.subscription.unsubscribe();
+    this.item = {kids: []};
+    this.ready = false;
+    this.subscription = this.subscribe();
   };
 
   constructor(private api: HackerNewsAPIService, private route: ActivatedRoute, private titleService: Title) {
   }
 
   ngOnInit() {
-    this.route.queryParamMap.pipe(
-      switchMap((param: ParamMap) => this.getData(param.get('p')))
-    ).subscribe(data => {
-        this.item = data;
-        if (this.item.kids === undefined) {
-          this.item.kids = [];
-        }
-        this.titleService.setTitle(this.item.title + ' | HNC');
-        this.ready = true;
-      },
-      err => {
-        console.log(err);
-        this.ready = true;
-      });
+    this.subscription = this.subscribe();
   }
 
 }

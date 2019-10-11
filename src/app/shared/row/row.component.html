@@ -10,8 +10,13 @@
         [style.padding-left]="index < 10? '8px' : '0'">
       {{index}}. <a [href]="new.url">{{new.title}}</a>
     </td>
-    <td *ngIf="isCommentPage && new.url === undefined" style="color:black;font-size: 16px;">
-      {{new.title}}
+    <td *ngIf="isCommentPage && new.url === undefined" style="font-size: 16px;">
+      <a [routerLink]="[]"
+         [queryParams]="{}"
+         (click)="refresh.emit();"
+         routerLinkActive="active"
+         [href]="new.url">{{new.title}}
+      </a>
     </td>
     <td *ngIf="isCommentPage && new.url !== undefined" style="font-size: 16px;">
       <a [href]="new.url">{{new.title}}
@@ -35,8 +40,8 @@
       <span *ngIf="isNews" class="web-link"><a class="info-row" [href]="'https://www.google.com/search?q='+new.title"
                                                target="_blank">web</a></span>
       <span>|</span>
-      <span><a class="info-row" [routerLink]="isCommentPage?['./']:['../comments/'+new.id]" routerLinkActive="active"
-               [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
+      <span><a class="info-row" [routerLink]="isCommentPage?[]:['../comments/'+new.id]" routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }" (click)="refresh.emit()">{{discuss}}</a></span>
     </td>
   </tr>
 </div>

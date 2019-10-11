@@ -1,6 +1,6 @@
 <table>
   <tbody>
-  <app-row *ngIf="item.id" [isCommentPage]="true" [id]="item.id"></app-row>
+  <app-row *ngIf="item.id" [isCommentPage]="true" (refresh)="refresh()" [id]="item.id"></app-row>
   <tr class="main-row" align="left">
     <td style="padding-left: 11px;border-bottom: 0.5pt solid grey;" [innerHTML]="item.text"
         *ngIf="item.text !== undefined"></td>

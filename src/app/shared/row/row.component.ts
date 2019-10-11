@@ -24,6 +24,9 @@ export class RowComponent implements OnInit {
   @Output()
   listFull = new EventEmitter();
 
+  @Output()
+  refresh = new EventEmitter();
+
   isNews: boolean;
 
   new: any = {};
