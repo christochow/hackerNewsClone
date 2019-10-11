@@ -1,19 +1,45 @@
 <div [ngClass]="isCommentPage?['comment-row']:['main-row']">
   <tr align="left">
     <td *ngIf="isCommentPage" width="2.5px"></td>
-    <td *ngIf="!isCommentPage && new.url === undefined" style="font-size: 15px" [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [routerLink]="['../comments/'+new.id]" routerLinkActive="active">{{new.title}}</a></td>
-    <td *ngIf="!isCommentPage && new.url !== undefined" style="font-size: 15px" [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [href]="new.url">{{new.title}}</a></td>
-    <td *ngIf="isCommentPage" style="font-size: 16px;"><a [routerLink]="['./']" [routerLinkActive]="new.url !== undefined? 'active':''" [href]="new.url">{{new.title}}</a></td>
+    <td *ngIf="!isCommentPage && new.url === undefined" style="font-size: 15px"
+        [style.padding-left]="index < 10? '8px' : '0'">
+      {{index}}. <a [routerLink]="['../comments/'+new.id]"
+                    routerLinkActive="active">{{new.title}}</a>
+    </td>
+    <td *ngIf="!isCommentPage && new.url !== undefined" style="font-size: 15px"
+        [style.padding-left]="index < 10? '8px' : '0'">
+      {{index}}. <a [href]="new.url">{{new.title}}</a>
+    </td>
+    <td *ngIf="isCommentPage && new.url === undefined" style="font-size: 16px;">
+      <a [routerLink]="[]"
+         routerLinkActive="active"
+         [href]="new.url">{{new.title}}
+      </a>
+    </td>
+    <td *ngIf="isCommentPage && new.url !== undefined" style="font-size: 16px;">
+      <a [href]="new.url">{{new.title}}
+      </a>
+    </td>
   </tr>
   <tr align="left" class="info-row">
     <td *ngIf="isCommentPage" width="2.5px"></td>
     <td>
-      <span *ngIf="!isCommentPage" class="normal-link">{{new.score}} points by <a class="info-row" [routerLink]="['../user/'+new.by]" routerLinkActive="active">{{new.by}}</a></span>
-      <span *ngIf="isCommentPage">{{new.score}} points by <a class="info-row" [routerLink]="['../../user/'+new.by]" routerLinkActive="active">{{new.by}}</a></span>
+      <span *ngIf="!isCommentPage" class="normal-link">
+        {{new.score}} points by <a class="info-row"
+                                   [routerLink]="['../user/'+new.by]"
+                                   routerLinkActive="active">{{new.by}}</a>
+      </span>
+      <span *ngIf="isCommentPage">
+        {{new.score}} points by <a class="info-row" [routerLink]="['../../user/'+new.by]"
+                                                             routerLinkActive="active">
+        {{new.by}}</a>
+      </span>
       <span *ngIf="isNews">|</span>
-      <span *ngIf="isNews" class="web-link"><a class="info-row" [href]="'https://www.google.com/search?q='+new.title" target="_blank">web</a></span>
+      <span *ngIf="isNews" class="web-link"><a class="info-row" [href]="'https://www.google.com/search?q='+new.title"
+                                               target="_blank">web</a></span>
       <span>|</span>
-      <span><a class="info-row" [routerLink]="isCommentPage?['./']:['../comments/'+new.id]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
+      <span><a class="info-row" [routerLink]="isCommentPage?['./']:['../comments/'+new.id]" routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
     </td>
   </tr>
 </div>
