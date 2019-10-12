@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   hasUser: boolean;
   id: string;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {

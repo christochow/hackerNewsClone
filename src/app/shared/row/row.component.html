@@ -13,7 +13,6 @@
     <td *ngIf="isCommentPage && new.url === undefined" style="font-size: 16px;">
       <a [routerLink]="[]"
          [queryParams]="{}"
-         (click)="refresh.emit();"
          routerLinkActive="active"
          [href]="new.url">{{new.title}}
       </a>
@@ -41,7 +40,7 @@
                                                target="_blank">web</a></span>
       <span>|</span>
       <span><a class="info-row" [routerLink]="isCommentPage?[]:['../comments/'+new.id]" routerLinkActive="active"
-               [routerLinkActiveOptions]="{ exact: true }" (click)="refresh.emit()">{{discuss}}</a></span>
+               [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
     </td>
   </tr>
 </div>

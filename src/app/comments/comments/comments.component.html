@@ -1,4 +1,4 @@
-<table>
+<table *ngIf="ready">
   <tbody>
   <app-row *ngIf="item.id" [isCommentPage]="true" (refresh)="refresh()" [id]="item.id"></app-row>
   <tr class="main-row" align="left">
@@ -13,13 +13,13 @@
       <a [routerLink]="['../'+item.id]" [queryParams]="{p:page+1}" routerLinkActive="active">...more</a>
     </td>
   </tr>
-  <tr *ngIf="ready" style="height: 10px;">
+  <tr style="height: 10px;">
     <td></td>
   </tr>
-  <tr *ngIf="ready" style="height: 2px;">
+  <tr style="height: 2px;">
     <td style="background-color: rgb(255, 102, 0);"></td>
   </tr>
-  <tr *ngIf="ready" style="height: 50px;">
+  <tr style="height: 50px;">
     <td></td>
   </tr>
   </tbody>

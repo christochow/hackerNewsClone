@@ -1,19 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, ParamMap, Router, RouterEvent} from '@angular/router';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
-import {mergeMap, switchMap} from 'rxjs/operators';
 import {Title} from '@angular/platform-browser';
 import {of} from 'rxjs';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-submissions',
   templateUrl: './submissions.component.html',
   styleUrls: ['./submissions.component.css']
 })
-export class SubmissionsComponent implements OnInit {
+export class SubmissionsComponent implements OnInit, OnDestroy {
 
   user: any;
-  submissions = [];
+  id;
+  subscription;
+  pageSub;
   page = 1;
   ready = false;
   listFull = false;
@@ -22,8 +24,11 @@ export class SubmissionsComponent implements OnInit {
     if (page !== undefined && page !== null) {
       const temp = parseInt(page, 10);
       if (!(isNaN(temp) || temp < 1)) {
-        if (temp > this.page) {
+        if (temp >= this.page) {
           window.scroll(0, 0);
+          if (temp === this.page) {
+            this.ready = false;
+          }
         }
         this.page = temp;
       }
@@ -32,19 +37,9 @@ export class SubmissionsComponent implements OnInit {
     }
     return this.ready ? of(this.user) : this.api.getUser(id);
   };
-
-  constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService, private title: Title) {
-  }
-
-  ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.title.setTitle(`${id}'s submissions | HNC`);
-    this.route.queryParamMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.getDataAndSetPage(params.get('p'), id)
-      )).subscribe(data => {
+  subscribe = () => this.getDataAndSetPage(this.route.snapshot.queryParamMap.get('p'), this.id)
+    .subscribe(data => {
         this.user = data;
-        this.submissions = this.user.submitted;
         this.ready = true;
         this.listFull = false;
       },
@@ -52,6 +47,28 @@ export class SubmissionsComponent implements OnInit {
         console.log(err);
         this.ready = true;
       });
+  refresh = () => {
+    this.subscription.unsubscribe();
+    this.subscription = this.subscribe();
+  };
+
+  constructor(private router: Router, private route: ActivatedRoute, private api: HackerNewsAPIService, private title: Title) {
+  }
+
+  ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.title.setTitle(`${this.id}'s submissions | HNC`);
+    this.subscription = this.subscribe();
+    this.pageSub = this.router.events.pipe(filter((e: RouterEvent) => e instanceof NavigationEnd)).subscribe(
+      () => {
+        this.refresh();
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.pageSub.unsubscribe();
   }
 
 }

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HackerNewsAPIService} from '../hacker-news-api.service';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, ParamMap, Router, RouterEvent} from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {mergeMap, switchMap} from 'rxjs/operators';
+import {filter, mergeMap, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 
 @Component({
@@ -10,27 +10,50 @@ import {of} from 'rxjs';
   templateUrl: './ask-show.component.html',
   styleUrls: ['./ask-show.component.css']
 })
-export class AskShowComponent implements OnInit {
+export class AskShowComponent implements OnInit, OnDestroy {
 
   stories: any[] = [];
   isShow: boolean;
   ready = false;
   listFull = false;
+  subscription;
+  pageSub;
   page = 1;
   onDisable = ($event, array) => array.filter(e => e !== $event.id);
   getData = (page) => {
     if (page !== undefined && page !== null) {
       const temp = parseInt(page, 10);
       if (!(isNaN(temp) || temp < 1)) {
-        if (temp > this.page) {
+        if (temp >= this.page) {
           window.scroll(0, 0);
+          if (temp === this.page) {
+            this.ready = false;
+          }
         }
         this.page = temp;
       }
     } else {
-      this.page = 1;
+      if (this.page === 1 && this.ready === true) {
+        this.ready = false;
+      } else {
+        this.page = 1;
+      }
     }
     return this.ready ? of(this.stories) : (this.isShow ? this.api.getShow() : this.api.getAsk());
+  };
+  subscribe = () => this.getData(this.route.snapshot.queryParamMap.get('p'))
+    .subscribe(data => {
+      this.stories = data as any[];
+      this.ready = true;
+      this.listFull = false;
+    },
+    err => {
+      console.log(err);
+      this.ready = true;
+    });
+  refresh = () => {
+    this.subscription.unsubscribe();
+    this.subscription = this.subscribe();
   };
 
   constructor(private api: HackerNewsAPIService, private router: Router, private titleService: Title, private route: ActivatedRoute) {
@@ -39,17 +62,17 @@ export class AskShowComponent implements OnInit {
   ngOnInit(): void {
     this.isShow = this.router.url === '/show';
     this.titleService.setTitle((this.isShow ? 'Show stories' : 'Ask stories') + ' | HNC');
-    this.route.queryParamMap.pipe(
-      switchMap((param: ParamMap) => this.getData(param.get('p')))
-    ).subscribe(data => {
-        this.stories = data as any[];
-        this.ready = true;
-        this.listFull = false;
-      },
-      err => {
-        console.log(err);
-        this.ready = true;
-      });
+    this.subscription = this.subscribe();
+    this.pageSub = this.router.events.pipe(filter((e: RouterEvent) => e instanceof NavigationEnd)).subscribe(
+      () => {
+        this.refresh();
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.pageSub.unsubscribe();
   }
 
 }
