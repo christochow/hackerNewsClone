@@ -1,4 +1,4 @@
-<div *ngIf="show">
+<div>
   <tr align="left" style="margin: 0">
     <td style="font-size: 15px" *ngIf="submission.url === undefined"  [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [routerLink]="['../../../comments/'+submission.id]" [routerLinkActive]="submission.url !== undefined? 'unactive':'active'"  [href]="submission.url">{{submission.title}}</a></td>
     <td style="font-size: 15px" *ngIf="submission.url !== undefined"   [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [href]="submission.url">{{submission.title}}</a></td>

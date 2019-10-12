@@ -23,7 +23,6 @@ export class SubmissionComponent implements OnInit {
 
   submission: any = {};
 
-  show = false;
 
   discuss: string;
 
@@ -40,8 +39,8 @@ export class SubmissionComponent implements OnInit {
       const hasKids = this.submission.descendants !== undefined && this.submission.descendants !== null;
       this.discuss = (!hasKids || this.submission.descendants === 0) ?
         'discuss' : this.submission.descendants + ' comment' + (this.submission.descendants === 1 ? '' : 's');
-      this.show = (!this.submission.deleted === true) && (!this.submission.dead === true) && (this.submission.type === 'story');
-      if (this.show === false) {
+      const show = (!this.submission.deleted === true) && (!this.submission.dead === true) && (this.submission.type === 'story');
+      if (show === false) {
         this.disable.emit({id: this.id});
       } else if (this.index % 30 === 0) {
         this.listFull.emit();
