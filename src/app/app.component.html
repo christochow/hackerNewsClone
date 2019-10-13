@@ -10,15 +10,15 @@
             <a style="padding-left: 5px;" class="title" routerLink="" routerLinkActive="active">Hacker News Clone</a>
           </td>
           <td style="vertical-align: center;">
-              <a style="padding-left: 5px;padding-right: 5px" routerLink="newest" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">new</a>
+              <a style="padding-left: 5px;padding-right: 5px" routerLink="newest" [ngClass]="isNewest?'active-link':''" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">new</a>
           </td>
           <td style="vertical-align: center;">|</td>
           <td style="vertical-align: center;">
-              <a style="padding-left: 5px;padding-right: 5px" routerLink="ask" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">ask</a>
+              <a style="padding-left: 5px;padding-right: 5px" routerLink="ask" [ngClass]="isAsk?'active-link':''" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">ask</a>
           </td>
           <td style="vertical-align: center;">|</td>
           <td style="vertical-align: center;">
-              <a style="padding-left: 5px;padding-right: 5px" routerLink="show" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">show</a>
+              <a style="padding-left: 5px;padding-right: 5px" routerLink="show" [ngClass]="isShow?'active-link':''" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">show</a>
           </td>
           <td *ngIf="hasUser" style="vertical-align: center;">|</td>
           <td *ngIf="hasUser">

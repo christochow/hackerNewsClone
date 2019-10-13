@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, ParamMap, Router} from '@angular/router';
 
 @Component({
@@ -6,23 +6,34 @@ import {ActivatedRoute, NavigationEnd, ParamMap, Router} from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   hasUser: boolean;
+  isNewest = false;
+  isAsk = false;
+  isShow = false;
   id: string;
+  sub;
 
   constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe(
+    this.sub = this.router.events.subscribe(
       value => {
         if (value instanceof NavigationEnd) {
           this.hasUser = value.url.includes('submissions');
           if (this.hasUser === true) {
             this.id = value.url.split('/')[2];
           }
+          this.isNewest = value.url.includes('newest');
+          this.isAsk = value.url.includes('ask');
+          this.isShow = value.url.includes('show');
         }
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.sub.subscribe();
   }
 }
