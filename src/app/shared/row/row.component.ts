@@ -24,7 +24,7 @@ export class RowComponent implements OnInit {
   @Output()
   listFull = new EventEmitter();
 
-  isNews: boolean;
+  isPoll: boolean;
 
   new: any = {};
 
@@ -34,13 +34,13 @@ export class RowComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isNews = this.router.url === '/newest';
     this.api.getItem(this.id).subscribe(r => {
       this.new = r;
       if (r === null) {
         this.disable.emit({id: this.id});
         return;
       }
+      this.isPoll = this.new.type === 'poll';
       const hasKids = this.new.descendants !== undefined && this.new.descendants !== null;
       this.discuss = (!hasKids || this.new.descendants === 0) ?
         'discuss' : this.new.descendants + ' comment' + (this.new.descendants === 1 ? '' : 's');

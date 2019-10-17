@@ -14,6 +14,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
   item: any = {kids: []};
   ready = false;
+  isPoll;
   page = 1;
   subscription;
   pageSub;
@@ -42,6 +43,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   subscribe = () => this.getData(this.route.snapshot.queryParamMap.get('p'))
     .subscribe(data => {
       this.item = data;
+      this.isPoll = this.item.type === 'poll';
       if (this.item.kids === undefined) {
         this.item.kids = [];
       }

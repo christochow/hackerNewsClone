@@ -23,6 +23,7 @@ export class SubmissionComponent implements OnInit {
 
   submission: any = {};
 
+  isPoll: boolean;
 
   discuss: string;
 
@@ -36,6 +37,7 @@ export class SubmissionComponent implements OnInit {
         return;
       }
       this.submission = r;
+      this.isPoll = this.submission.type === 'poll';
       const hasKids = this.submission.descendants !== undefined && this.submission.descendants !== null;
       this.discuss = (!hasKids || this.submission.descendants === 0) ?
         'discuss' : this.submission.descendants + ' comment' + (this.submission.descendants === 1 ? '' : 's');

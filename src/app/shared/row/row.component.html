@@ -3,7 +3,7 @@
     <td *ngIf="isCommentPage" width="2.5px"></td>
     <td *ngIf="!isCommentPage && new.url === undefined" style="font-size: 15px"
         [style.padding-left]="index < 10? '8px' : '0'">
-      {{index}}. <a [routerLink]="['../comments/'+new.id]"
+      {{index}}. <a [routerLink]="['../'+(isPoll?'poll/':'comments/')+new.id]"
                     routerLinkActive="active">{{new.title}}</a>
     </td>
     <td *ngIf="!isCommentPage && new.url !== undefined" style="font-size: 15px"
@@ -14,7 +14,7 @@
       <a [routerLink]="[]"
          [queryParams]="{}"
          routerLinkActive="active"
-         [href]="new.url">{{new.title}}
+         >{{new.title}}
       </a>
     </td>
     <td *ngIf="isCommentPage && new.url !== undefined" style="font-size: 16px;">
@@ -35,11 +35,11 @@
                                                              routerLinkActive="active">
         {{new.by}}</a>
       </span>
-      <span *ngIf="isNews">|</span>
-      <span *ngIf="isNews" class="web-link"><a class="info-row" [href]="'https://www.google.com/search?q='+new.title"
+      <span *ngIf="new.url !== undefined">|</span>
+      <span *ngIf="new.url !== undefined" class="web-link"><a class="info-row" [href]="'https://www.google.com/search?q='+new.title"
                                                target="_blank">web</a></span>
       <span>|</span>
-      <span><a class="info-row" [routerLink]="isCommentPage?[]:['../comments/'+new.id]" routerLinkActive="active"
+      <span><a class="info-row" [routerLink]="isCommentPage?[]:['../'+(isPoll?'poll/':'comments/')+new.id]" routerLinkActive="active"
                [routerLinkActiveOptions]="{ exact: true }">{{discuss}}</a></span>
     </td>
   </tr>
