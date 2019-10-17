@@ -39,7 +39,8 @@ export class SubmissionComponent implements OnInit {
       const hasKids = this.submission.descendants !== undefined && this.submission.descendants !== null;
       this.discuss = (!hasKids || this.submission.descendants === 0) ?
         'discuss' : this.submission.descendants + ' comment' + (this.submission.descendants === 1 ? '' : 's');
-      const show = (!this.submission.deleted === true) && (!this.submission.dead === true) && (this.submission.type === 'story');
+      const show = (this.submission.deleted !== true) && (this.submission.dead !== true) && (this.submission.type !== 'comment')
+        && (this.submission.type !== 'pollopt');
       if (show === false) {
         this.disable.emit({id: this.id});
       } else if (this.index % 30 === 0) {

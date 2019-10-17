@@ -44,7 +44,7 @@ export class RowComponent implements OnInit {
       const hasKids = this.new.descendants !== undefined && this.new.descendants !== null;
       this.discuss = (!hasKids || this.new.descendants === 0) ?
         'discuss' : this.new.descendants + ' comment' + (this.new.descendants === 1 ? '' : 's');
-      const show = (!this.new.deleted === true) && (!this.new.dead === true);
+      const show = (this.new.deleted !== true) && (this.new.dead !== true);
       if (show === false) {
         this.disable.emit({id: this.id});
       } else if (this.index % 30 === 0) {
