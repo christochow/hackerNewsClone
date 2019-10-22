@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {GeneralComponent} from './new-top/general.component';
+import {MainPageComponent} from './shared/main-page/main-page.component';
 import {CommentsComponent} from './comments/comments/comments.component';
 import {UserInfoComponent} from './user/user-info/user-info.component';
 import {SubmissionsComponent} from './user/submissions/submissions.component';
@@ -12,10 +12,10 @@ const routes: Routes = [
   {path: 'poll/:id', component: CommentsComponent},
   {path: 'user/:id', component: UserInfoComponent},
   {path: 'user/:id/submissions', component: SubmissionsComponent},
-  {path: 'newest', component: GeneralComponent},
-  {path: 'ask', component: GeneralComponent},
-  {path: 'show', component: GeneralComponent},
-  {path: 'news', component: GeneralComponent},
+  {path: 'newest', component: MainPageComponent},
+  {path: 'ask', component: MainPageComponent},
+  {path: 'show', component: MainPageComponent},
+  {path: 'news', component: MainPageComponent},
   {path: '**', redirectTo: 'news', pathMatch: 'full'}
 ];
 

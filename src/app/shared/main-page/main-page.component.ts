@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HackerNewsAPIService} from '../hacker-news-api.service';
+import {HackerNewsAPIService} from '../../hacker-news-api.service';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, ParamMap, Router, RouterEvent} from '@angular/router';
 import {filter, switchMap, take, takeWhile} from 'rxjs/operators';
@@ -7,10 +7,10 @@ import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-new',
-  templateUrl: './new-top.component.html',
-  styleUrls: ['./new-top.component.css']
+  templateUrl: './main-page.component.html',
+  styleUrls: ['./main-page.component.css']
 })
-export class GeneralComponent implements OnInit, OnDestroy {
+export class MainPageComponent implements OnInit, OnDestroy {
 
   stories: any[] = [];
   isTop: boolean;

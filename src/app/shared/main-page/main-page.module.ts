@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GeneralComponent } from './general.component';
-import {SharedModule} from '../shared/shared.module';
+import { MainPageComponent } from './main-page.component';
+import {SharedModule} from '../shared.module';
 import {RouterModule} from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [GeneralComponent],
+  declarations: [MainPageComponent],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule
   ],
-  exports: [GeneralComponent],
+  exports: [MainPageComponent],
 })
-export class NewTopModule { }
+export class MainPageModule { }
