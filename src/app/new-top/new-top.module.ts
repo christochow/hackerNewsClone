@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewTopComponent } from './new-top.component';
+import { GeneralComponent } from './general.component';
 import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [NewTopComponent],
+  declarations: [GeneralComponent],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule
   ],
-  exports: [NewTopComponent],
+  exports: [GeneralComponent],
 })
 export class NewTopModule { }

@@ -6,7 +6,9 @@
         *ngIf="item.text !== undefined"></td>
   </tr>
   <app-poll *ngIf="item.id && isPoll" [item]="item"></app-poll>
-  <tr><td style="border-bottom: 0.5pt solid grey;"></td></tr>
+  <tr>
+    <td style="border-bottom: 0.5pt solid grey;"></td>
+  </tr>
   <tr class="separator"></tr>
   <tr app-comment *ngFor="let i of item.kids.slice(40*(page-1), 40*page)" [depth]="0" [id]="i"
       (onDisable)="item.kids = onDisable($event, item.kids)"></tr>

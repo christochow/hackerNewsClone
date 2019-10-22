@@ -3,17 +3,19 @@ import {HackerNewsAPIService} from '../hacker-news-api.service';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, ParamMap, Router, RouterEvent} from '@angular/router';
 import {filter, switchMap, take, takeWhile} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-new',
   templateUrl: './new-top.component.html',
   styleUrls: ['./new-top.component.css']
 })
-export class NewTopComponent implements OnInit, OnDestroy {
+export class GeneralComponent implements OnInit, OnDestroy {
 
   stories: any[] = [];
   isTop: boolean;
+  isShow: boolean;
+  isAsk: boolean;
   ready = false;
   listFull = false;
   page = 1;
@@ -39,7 +41,19 @@ export class NewTopComponent implements OnInit, OnDestroy {
         this.page = 1;
       }
     }
-    return this.ready ? of(this.stories) : (this.isTop ? this.api.getTop() : this.api.getNews());
+    let apiResponse;
+    if (this.ready === false) {
+      if (this.isTop === true) {
+        apiResponse = this.api.getTop();
+      } else if (this.isAsk === true) {
+        apiResponse = this.api.getAsk();
+      } else if (this.isShow === true) {
+        apiResponse = this.api.getShow();
+      } else {
+        apiResponse = this.api.getNews();
+      }
+    }
+    return this.ready ? of(this.stories) : apiResponse;
   };
   subscribe = () => this.getData(this.route.snapshot.queryParamMap.get('p'))
     .subscribe(data => {
@@ -52,8 +66,8 @@ export class NewTopComponent implements OnInit, OnDestroy {
         this.ready = true;
       });
   refresh = () => {
-      this.subscription.unsubscribe();
-      this.subscription = this.subscribe();
+    this.subscription.unsubscribe();
+    this.subscription = this.subscribe();
   };
 
   constructor(private api: HackerNewsAPIService, private titleService: Title, private router: Router, private route: ActivatedRoute) {
@@ -61,7 +75,17 @@ export class NewTopComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isTop = this.router.url === '/news';
-    this.titleService.setTitle(this.isTop ? 'Hacker news Clone' : 'New stories | HNC');
+    this.isShow = this.router.url === '/show';
+    this.isAsk = this.router.url === '/ask';
+    let title = 'Hacker News Clone';
+    if (this.isTop === true) {
+      title = 'New stories | HNC';
+    } else if (this.isAsk === true) {
+      title = 'Ask stories | HNC';
+    } else if (this.isShow === true) {
+      title = 'Show stories | HNC';
+    }
+    this.titleService.setTitle(title);
     this.subscription = this.subscribe();
     this.pageSub = this.router.events.pipe(filter((e: RouterEvent) => e instanceof NavigationEnd)).subscribe(
       () => {

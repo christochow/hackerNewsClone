@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {NewTopComponent} from './new-top/new-top.component';
-import {AskShowComponent} from './ask-show/ask-show.component';
+import {GeneralComponent} from './new-top/general.component';
 import {CommentsComponent} from './comments/comments/comments.component';
 import {UserInfoComponent} from './user/user-info/user-info.component';
 import {SubmissionsComponent} from './user/submissions/submissions.component';
@@ -13,10 +12,10 @@ const routes: Routes = [
   {path: 'poll/:id', component: CommentsComponent},
   {path: 'user/:id', component: UserInfoComponent},
   {path: 'user/:id/submissions', component: SubmissionsComponent},
-  {path: 'newest', component: NewTopComponent},
-  {path: 'ask', component: AskShowComponent},
-  {path: 'show', component: AskShowComponent},
-  {path: 'news', component: NewTopComponent},
+  {path: 'newest', component: GeneralComponent},
+  {path: 'ask', component: GeneralComponent},
+  {path: 'show', component: GeneralComponent},
+  {path: 'news', component: GeneralComponent},
   {path: '**', redirectTo: 'news', pathMatch: 'full'}
 ];
 
