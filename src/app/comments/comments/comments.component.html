@@ -10,9 +10,9 @@
     <td style="border-bottom: 0.5pt solid grey;"></td>
   </tr>
   <tr class="separator"></tr>
-  <tr app-comment *ngFor="let i of item.kids.slice(40*(page-1), 40*page)" [depth]="0" [id]="i"
+  <tr app-comment *ngFor="let i of item.kids.slice(30*(page-1), 30*page)" [depth]="0" [id]="i"
       (onDisable)="item.kids = onDisable($event, item.kids)"></tr>
-  <tr *ngIf="ready && item.kids.slice(40*(page)).length > 0" style="height: 10px;" align="left">
+  <tr *ngIf="ready && item.kids.slice(30*(page)).length > 0" style="height: 10px;" align="left">
     <td>
       <a [routerLink]="['../'+item.id]" [queryParams]="{p:page+1}" routerLinkActive="active">...more</a>
     </td>
