@@ -18,6 +18,9 @@ export class RowComponent implements OnInit {
   @Input()
   isCommentPage: boolean;
 
+  @Input()
+  isJobs: boolean;
+
   @Output()
   disable = new EventEmitter();
 

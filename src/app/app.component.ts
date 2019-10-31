@@ -11,6 +11,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isNewest = false;
   isAsk = false;
   isShow = false;
+  isJobs = false;
   id: string;
   sub;
 
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.isNewest = value.url.includes('newest');
           this.isAsk = value.url.includes('ask');
           this.isShow = value.url.includes('show');
+          this.isJobs = value.url.includes('jobs');
         }
       }
     );

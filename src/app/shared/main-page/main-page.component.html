@@ -1,7 +1,7 @@
 <table width="100%" cellpadding="0" cellspacing="0" border="0" *ngIf="ready">
   <tbody>
   <app-row *ngFor="let s of stories.slice(30*(page-1), 30*page) let i = index"
-           [id]="s" [index]="30*(page-1)+i+1"
+           [id]="s" [index]="30*(page-1)+i+1" [isJobs]="isJobs" [isCommentPage]="false"
            (disable)="stories = onDisable($event, stories)" (listFull)="listFull = true;">
   </app-row>
   <tr *ngIf="ready && listFull && stories.slice(30*(page)).length > 0" style="height: 10px;" align="left">

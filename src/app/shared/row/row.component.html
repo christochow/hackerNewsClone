@@ -22,7 +22,8 @@
       </a>
     </td>
   </tr>
-  <tr align="left" class="info-row">
+  <tr *ngIf="isJobs"><td class="job-row"></td></tr>
+  <tr align="left" class="info-row" *ngIf="!isJobs">
     <td *ngIf="isCommentPage" width="2.5px"></td>
     <td>
       <span *ngIf="!isCommentPage" class="normal-link">

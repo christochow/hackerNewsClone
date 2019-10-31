@@ -2,8 +2,9 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, ParamMap, Router, RouterEvent} from '@angular/router';
-import {filter, switchMap, take, takeWhile} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {filter} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-new',
@@ -16,6 +17,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   isTop: boolean;
   isShow: boolean;
   isAsk: boolean;
+  isJobs: boolean;
   ready = false;
   listFull = false;
   page = 1;
@@ -23,7 +25,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   pageSub;
   onDisable = ($event, array) => array.filter(e => e !== $event.id);
   getData = (page) => {
-    if (page !== undefined && page !== null) {
+    if (!isNullOrUndefined(page)) {
       const temp = parseInt(page, 10);
       if (!(isNaN(temp) || temp < 1)) {
         if (temp >= this.page) {
@@ -49,6 +51,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
         apiResponse = this.api.getAsk();
       } else if (this.isShow === true) {
         apiResponse = this.api.getShow();
+      } else if (this.isJobs === true) {
+        apiResponse = this.api.getJobs();
       } else {
         apiResponse = this.api.getNews();
       }
@@ -77,6 +81,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.isTop = this.router.url === '/news';
     this.isShow = this.router.url === '/show';
     this.isAsk = this.router.url === '/ask';
+    this.isJobs = this.router.url === '/jobs';
     let title = 'Hacker News Clone';
     if (this.isTop === true) {
       title = 'New stories | HNC';

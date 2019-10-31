@@ -20,6 +20,10 @@
           <td style="vertical-align: center;">
               <a style="padding-left: 5px;padding-right: 5px" routerLink="show" [ngClass]="isShow?'active-link':''" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">show</a>
           </td>
+          <td style="vertical-align: center;">|</td>
+          <td style="vertical-align: center;">
+            <a style="padding-left: 5px;padding-right: 5px" routerLink="jobs" [ngClass]="isJobs?'active-link':''" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">jobs</a>
+          </td>
           <td *ngIf="hasUser" style="vertical-align: center;">|</td>
           <td *ngIf="hasUser">
             <div style="padding-left: 5px;padding-right: 5px;color: white">
@@ -30,6 +34,7 @@
         </tbody>
       </table>
     </tr>
+    <tr class="separator-row"><td></td></tr>
     <router-outlet></router-outlet>
     </tbody>
   </table>
