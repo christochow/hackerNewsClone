@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -6,13 +6,14 @@ import {HttpClient} from '@angular/common/http';
 })
 export class HackerNewsAPIService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getTop(){
+  getTop() {
     return this.http.get('https://hacker-news.firebaseio.com/v0/topstories.json');
   }
 
-  getNews(){
+  getNews() {
     return this.http.get('https://hacker-news.firebaseio.com/v0/newstories.json');
   }
 
@@ -20,16 +21,20 @@ export class HackerNewsAPIService {
     return this.http.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
   }
 
-  getAsk(){
+  getAsk() {
     return this.http.get('https://hacker-news.firebaseio.com/v0/askstories.json');
   }
 
-  getShow(){
+  getShow() {
     return this.http.get('https://hacker-news.firebaseio.com/v0/showstories.json');
   }
 
-  getUser(id: string){
+  getUser(id: string) {
     return this.http.get(`https://hacker-news.firebaseio.com/v0/user/${id}.json`);
+  }
+
+  getJobs() {
+    return this.http.get('https://hacker-news.firebaseio.com/v0/jobstories.json');
   }
 
 }
