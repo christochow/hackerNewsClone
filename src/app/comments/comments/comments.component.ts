@@ -4,6 +4,7 @@ import {filter, mergeMap, switchMap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, ParamMap, Router, RouterEvent} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {of} from 'rxjs';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-comments',
@@ -20,7 +21,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   pageSub;
   onDisable = ($event, array) => array.filter(e => e !== $event.id);
   getData = (page) => {
-    if (page !== undefined && page !== null) {
+    if (!isNullOrUndefined(page)) {
       const temp = parseInt(page, 10);
       if (!(isNaN(temp) || temp < 1)) {
         if (temp >= this.page) {

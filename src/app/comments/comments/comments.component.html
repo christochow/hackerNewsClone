@@ -1,6 +1,6 @@
 <table *ngIf="ready">
   <tbody>
-  <app-row *ngIf="item.id" [isCommentPage]="true" [id]="item.id"></app-row>
+  <app-row *ngIf="item.id" [isCommentPage]="true" [isJobs]="false" [id]="item.id"></app-row>
   <tr class="main-row" align="left">
     <td style="padding-left: 11px;padding-top: 10px" [innerHTML]="item.text"
         *ngIf="item.text !== undefined"></td>
