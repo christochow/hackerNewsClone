@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
 import {Router} from '@angular/router';
+import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
 
 @Component({
   selector: 'app-submission',
@@ -38,11 +39,11 @@ export class SubmissionComponent implements OnInit {
       }
       this.submission = r;
       this.isPoll = this.submission.type === 'poll';
-      const hasKids = this.submission.descendants !== undefined && this.submission.descendants !== null;
+      const hasKids = isNotNullOrUndefined(this.submission.descendants);
       this.discuss = (!hasKids || this.submission.descendants === 0) ?
         'discuss' : this.submission.descendants + ' comment' + (this.submission.descendants === 1 ? '' : 's');
       const show = (this.submission.deleted !== true) && (this.submission.dead !== true) && (this.submission.type !== 'comment')
-        && (this.submission.type !== 'pollopt');
+        && (this.submission.type !== 'pollopt') && isNotNullOrUndefined(this.submission.title);
       if (show === false) {
         this.disable.emit({id: this.id});
       } else if (this.index % 30 === 0) {
