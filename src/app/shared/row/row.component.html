@@ -8,7 +8,7 @@
     </td>
     <td *ngIf="!isCommentPage && new.url !== undefined" style="font-size: 15px"
         [style.padding-left]="index < 10? '8px' : '0'">
-      {{index}}. <a [href]="new.url">{{new.title}}</a>
+      {{index}}. <a [href]="new.url" target="_blank">{{new.title}}</a>
     </td>
     <td *ngIf="isCommentPage && new.url === undefined" style="font-size: 16px;">
       <a [routerLink]="[]"
@@ -18,7 +18,7 @@
       </a>
     </td>
     <td *ngIf="isCommentPage && new.url !== undefined" style="font-size: 16px;">
-      <a [href]="new.url">{{new.title}}
+      <a [href]="new.url" target="_blank">{{new.title}}
       </a>
     </td>
   </tr>

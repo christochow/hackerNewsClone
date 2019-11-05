@@ -1,9 +1,9 @@
 <div>
   <tr align="left" style="margin: 0">
     <td style="font-size: 15px" *ngIf="submission.url === undefined"  [style.padding-left]="index < 10? '8px' : '0'">
-      {{index}}. <a [routerLink]="['../../../'+(isPoll?'poll/':'comments/')+submission.id]" routerLinkActive="active"  [href]="submission.url">{{submission.title}}</a>
+      {{index}}. <a [routerLink]="['../../../'+(isPoll?'poll/':'comments/')+submission.id]" routerLinkActive="active">{{submission.title}}</a>
     </td>
-    <td style="font-size: 15px" *ngIf="submission.url !== undefined"   [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [href]="submission.url">{{submission.title}}</a></td>
+    <td style="font-size: 15px" *ngIf="submission.url !== undefined"   [style.padding-left]="index < 10? '8px' : '0'">{{index}}. <a [href]="submission.url" target="_blank">{{submission.title}}</a></td>
   </tr>
   <tr align="left" style="margin: 0;color: grey">
     <td>
