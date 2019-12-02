@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-prod": "ng build --prod --base-href \"https://christochow.github.io/hackerNewsClone/\"",
-    "deploy": "ngh --dir=dist/hackerNewsClone"
+    "deploy": "ngh --dir=dist/hackerNewsClone",
+    "run-deploy": "npm run-script build-prod && npm run-script deploy"
   },
   "private": true,
   "dependencies": {
