@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
 import {Router} from '@angular/router';
 import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-submission',
@@ -33,7 +34,7 @@ export class SubmissionComponent implements OnInit {
 
   ngOnInit() {
     this.api.getItem(this.id).subscribe(r => {
-      if (r === null) {
+      if (isNullOrUndefined(r)) {
         this.disable.emit({id: this.id});
         return;
       }

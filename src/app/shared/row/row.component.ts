@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HackerNewsAPIService} from '../../hacker-news-api.service';
 import {Router} from '@angular/router';
 import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-row',
@@ -39,12 +40,11 @@ export class RowComponent implements OnInit {
 
   ngOnInit() {
     this.api.getItem(this.id).subscribe(r => {
-      this.new = r;
-      console.log(this.new)
-      if (r === null) {
+      if (isNullOrUndefined(r)) {
         this.disable.emit({id: this.id});
         return;
       }
+      this.new = r;
       this.isPoll = this.new.type === 'poll';
       const hasKids = isNotNullOrUndefined(this.new.descendants);
       this.discuss = (!hasKids || this.new.descendants === 0) ?
